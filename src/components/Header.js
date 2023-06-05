@@ -1,29 +1,34 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 export class Header extends Component {
     render() {
         return (
             <div>
-                <nav className="navbar navbar-expand-lg bg-dark">
+                <nav className="navbar navbar-expand-lg bg-dark navbar-light ">
                     <div className="container "> 
-                        <a className="navbar-brand text-white" href="#">DailyNews</a>
+                        <Link className="navbar-brand text-white" to="/">DailyNews</Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div className="navbar-nav " >
-                                <a className="nav-link text-white" aria-current="page" href="#">Home</a>
-                                <a className="nav-link text-white" href="#">Features</a>
-                                <a className="nav-link text-white" href="#">Pricing</a>
+                                <Link className="nav-link text-white" to="/">Home</Link>
+                                <Link className="nav-link text-white" to="/business">Business</Link>
+                                <Link className="nav-link text-white" to="/entertainment">Entertainment</Link>
+                           
+                                <Link className="nav-link text-white" to="/health">Health</Link>
+                                <Link className="nav-link text-white" to="/science">Science</Link>
+                                <Link className="nav-link text-white" to="/sports">Sports</Link>
+                                <Link className="nav-link text-white" to="/technology">Technology</Link>
 
                             </div>
                         </div>
                     </div>
                 </nav>
-            </div>
+            </div> 
         )
     }
 }
 
 export default Header
-
