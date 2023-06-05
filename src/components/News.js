@@ -16,7 +16,7 @@ export class News extends Component {
     }
     async componentDidMount(){
    
-        let url ="https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=df8a7771fa5741d986caa7313ca59aed&page=1&pagesize=21";
+        let url =`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=df8a7771fa5741d986caa7313ca59aed&page=1&pagesize=${this.props.pageSize}`;
         let data = await fetch(url);
         let parseData = await data.json();
         console.log(parseData);
@@ -30,7 +30,7 @@ export class News extends Component {
 
      handlePreviousCLick = async()=>{
       
-        let url =`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=df8a7771fa5741d986caa7313ca59aed&page=${this.state.page-1}&pagesize=21`;
+        let url =`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=df8a7771fa5741d986caa7313ca59aed&page=${this.state.page-1}&pagesize=${this.props.pageSize}`;
         let data = await fetch(url);
         let parseData = await data.json();
         console.log(parseData);
@@ -43,12 +43,12 @@ export class News extends Component {
     }
     
     handleNextClick = async () =>{
-        if(this.state.page + 1 > Math.ceil(this.state.totalResults/21)){
+        if(this.state.page + 1 > Math.ceil(this.state.totalResults/this.props.pageSize)){
 
         }
         else{
   
-        let url =`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=df8a7771fa5741d986caa7313ca59aed&page=${this.state.page+1}&pagesize=21`;
+        let url =`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=df8a7771fa5741d986caa7313ca59aed&page=${this.state.page+1}&pagesize=${this.props.pageSize}`;
         let data = await fetch(url);
         let parseData = await data.json();
         console.log(parseData);
@@ -78,7 +78,7 @@ export class News extends Component {
 
                 <div className='container d-flex justify-content-between'>
                     <button disabled={this.state.page<=1} type="button" className='btn btn-dark' onClick={this.handlePreviousCLick} >	&larr; Previous</button>
-                    <button  className='btn btn-dark' type="button" onClick={this.handleNextClick} >Next &rarr;</button>
+                    <button disabled={this.state.page + 1 > Math.ceil(this.state.totalResults/this.props.pageSize)}  className='btn btn-dark' type="button" onClick={this.handleNextClick} >Next &rarr;</button>
                 </div>
 
 
