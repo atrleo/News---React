@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
+import Spinner from './Spinner';
+
 
 export class News extends Component {
 
@@ -9,7 +11,7 @@ export class News extends Component {
         super();
         this.state = {
             articles: [],
-            loading: true,
+            loading : false,
             page :1 ,
         }
 
@@ -31,30 +33,34 @@ export class News extends Component {
      handlePreviousCLick = async()=>{
       
         let url =`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=df8a7771fa5741d986caa7313ca59aed&page=${this.state.page-1}&pagesize=${this.props.pageSize}`;
+       {this.setState(
+        {loading:true}
+       )};
         let data = await fetch(url);
         let parseData = await data.json();
-        console.log(parseData);
+        
         this.setState({
             page:this.state.page-1,
-            articles:parseData.articles
+            articles:parseData.articles,
+            loading:false,
         });
 
 
     }
     
     handleNextClick = async () =>{
-        if(this.state.page + 1 > Math.ceil(this.state.totalResults/this.props.pageSize)){
-
-        }
-        else{
-  
-        let url =`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=df8a7771fa5741d986caa7313ca59aed&page=${this.state.page+1}&pagesize=${this.props.pageSize}`;
+        if(!(this.state.page + 1 > Math.ceil(this.state.totalResults/this.props.pageSize))){
+         let url =`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=df8a7771fa5741d986caa7313ca59aed&page=${this.state.page+1}&pagesize=${this.props.pageSize}`;
+        {this.setState(
+            {loading:true}
+        )};
         let data = await fetch(url);
         let parseData = await data.json();
-        console.log(parseData);
+        
         this.setState({
             page : this.state.page + 1,
             articles:parseData.articles,
+            loading:false,
             });
         }
 
@@ -63,10 +69,12 @@ export class News extends Component {
 
     render() {
         return (
-            <div className='container my-4'>
-                <h1 style={{textAlign:'center'}}>Highlighted news for today</h1>
+            <div className='container my-4 text-center'>
+                <h1 style={{textAlign:'center'}}>Highlighted news for today </h1>
+                {this.state.loading && <Spinner />}
+         
                 <div className='row ' >
-                    {this.state.articles.map((element) => {
+                    {!this.state.loading && this.state.articles.map((element) => {
 
                         return <div className='col-md-4'    key={element.url}> <NewsItem title={element.title} description={element.description?element.description.slice(0,120):""} imageUrl={element.urlToImage} newsUrl={element.url} />
                         </div>
