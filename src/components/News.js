@@ -48,7 +48,7 @@ export class News extends Component {
 
     async componentDidMount() {
 
-        this.
+        this.updateNews();
 
     }
 
