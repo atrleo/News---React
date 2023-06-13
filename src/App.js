@@ -1,7 +1,7 @@
 
 import './App.css';
 
-import React, { Component, useState } from 'react'
+import React, {  useState } from 'react'
 import Header from './components/Header';
 import News from './components/News';
 import LoadingBar from 'react-top-loading-bar'
