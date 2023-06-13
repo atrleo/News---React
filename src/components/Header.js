@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
-export class Header extends Component {
-    render() {
+const Header = () => {
+   
         return (
             <div>
-                <nav className="navbar navbar-expand-lg bg-dark navbar-light ">
+                <nav className="navbar fixed-top navbar-expand-lg bg-dark navbar-light ">
                     <div className="container "> 
                         <Link className="navbar-brand text-white" to="/">DailyNews</Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,7 @@ export class Header extends Component {
                 </nav>
             </div> 
         )
-    }
+    
 }
 
 export default Header
